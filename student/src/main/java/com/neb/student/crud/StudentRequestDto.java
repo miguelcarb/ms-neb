@@ -20,4 +20,5 @@ public class StudentRequestDto implements Serializable {
     private String email;
 
     private String degree;
+
 }
