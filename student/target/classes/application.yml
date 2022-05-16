@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: ms-neb-student
+    name: ms-neb-message
   # Data source settings
   datasource:
     url: jdbc:postgresql://localhost:5432/ms-uni?currentSchema=public
