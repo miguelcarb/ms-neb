@@ -6,8 +6,8 @@ spring:
     name: ms-neb-student
   # Data source settings
   datasource:
-    url: jdbc:postgresql://localhost:5432/ms-uni?currentSchema=public
-    username: miguelcarb
+    url: jdbc:postgresql://localhost:5432/unipostgre?currentSchema=public
+    username: miguel
     password: miguelcarbpost890
     driver-class-name: org.postgresql.Driver
     hikari:

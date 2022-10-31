@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @SuperBuilder
-@Table(name = "student_message")
+@Table(name = "gen_message")
 public class MessageEntity {
 
     @Id

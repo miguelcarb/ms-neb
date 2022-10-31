@@ -1,6 +1,5 @@
 package com.neb.student.entities;
 
-import com.neb.student.entities.PersonEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

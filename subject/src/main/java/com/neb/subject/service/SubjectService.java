@@ -3,6 +3,7 @@ package com.neb.subject.service;
 import com.neb.subject.api.SubjectRequestDto;
 import com.neb.subject.api.SubjectResponseDto;
 import com.neb.subject.entities.SubjectEntity;
+import com.neb.subject.mapper.SubjectMapper;
 import com.neb.subject.repository.SubjectRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,15 +17,12 @@ import org.springframework.util.ObjectUtils;
 public class SubjectService {
 
     private final SubjectRepository repository;
+    private final SubjectMapper subjectMapper;
 
     @Transactional
     public void addSubject(SubjectRequestDto requestDto) {
 
-        SubjectEntity subject = new SubjectEntity();
-
-        subject.setCode(requestDto.getCode());
-        subject.setTitle(requestDto.getTitle());
-        subject.setCredits(requestDto.getCredits());
+        SubjectEntity subject = subjectMapper.dtoToEntity(requestDto);;
 
         repository.save(subject);
     }

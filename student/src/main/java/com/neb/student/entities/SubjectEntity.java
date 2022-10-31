@@ -22,7 +22,7 @@ public class SubjectEntity {
     @Column(name = "subject_id")
     private Long id;
 
-    @Column(name = "subject_code", length = 20)
+    @Column(name = "subject_code", length = 20, unique = true)
     private String code;
 
     @Column(name = "subject_title", length = 50)

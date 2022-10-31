@@ -7,7 +7,7 @@ spring:
   # Data source settings
   datasource:
     url: jdbc:postgresql://localhost:5432/ms-uni?currentSchema=public
-    username: miguelcarb
+    username: miguel
     password: miguelcarbpost890
     driver-class-name: org.postgresql.Driver
     hikari:
