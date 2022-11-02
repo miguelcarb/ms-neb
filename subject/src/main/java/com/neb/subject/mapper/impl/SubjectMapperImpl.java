@@ -1,7 +1,7 @@
 package com.neb.subject.mapper.impl;
 
-import com.neb.subject.api.SubjectRequestDto;
-import com.neb.subject.api.SubjectResponseDto;
+import com.neb.subject.api.request.SubjectRequestDto;
+import com.neb.subject.api.response.SubjectResponseDto;
 import com.neb.subject.entities.SubjectEntity;
 import com.neb.subject.mapper.SubjectMapper;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.neb.subject.api;
+package com.neb.subject.api.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

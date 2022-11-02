@@ -1,8 +1,11 @@
 package com.neb.subject.controller;
 
-import com.neb.subject.api.SubjectRequestDto;
-import com.neb.subject.api.SubjectResponseDto;
+import com.neb.subject.api.request.SubjectFilterRequestDto;
+import com.neb.subject.api.request.SubjectRequestDto;
+import com.neb.subject.api.response.SliceCriteriaResponseDto;
+import com.neb.subject.api.response.SubjectResponseDto;
 import com.neb.subject.service.SubjectService;
+import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +51,38 @@ public class SubjectController {
         SubjectResponseDto responseDto = service.findSubjectById(id);
 
         log.debug("Leaving findSubjectById [id]: {}", id);
+
+        return ResponseEntity.ok().body(responseDto);
+    }
+
+    @GetMapping(value = "/criteria")
+    public ResponseEntity<SliceCriteriaResponseDto> findSubjectByCriteria(
+        @ApiParam(name = "code", value = "code of the subject")
+        @RequestParam(required = false, name = "code")
+        String code,
+        @ApiParam(name = "title", value = "title of the subject")
+        @RequestParam(required = false, name = "title")
+        String title,
+        @ApiParam(name = "pageSize", value = "number of elements to be returned", example = "10")
+        @RequestParam(value = "pageSize", required = false, defaultValue = "10")
+        Integer pageSize,
+        @ApiParam(name = "offset", value = "index from which the result must be fetched", example = "0")
+        @RequestParam(value = "offset", required = false, defaultValue = "0")
+        Integer offset
+    ) {
+        log.debug("Entering findSubjectByCriteria");
+
+        SubjectFilterRequestDto criteria = SubjectFilterRequestDto
+                .builder()
+                .code(code)
+                .title(title)
+                .pageSize(pageSize)
+                .offset(offset)
+                .build();
+
+        SliceCriteriaResponseDto responseDto = service.findSubjectByCriteria(criteria);
+
+        log.debug("Leaving findSubjectByCriteria [response]: {}", responseDto);
 
         return ResponseEntity.ok().body(responseDto);
     }

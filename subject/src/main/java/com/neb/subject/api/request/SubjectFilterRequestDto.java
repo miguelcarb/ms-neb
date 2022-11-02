@@ -1,21 +1,22 @@
-package com.neb.subject.api;
+package com.neb.subject.api.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SubjectRequestDto implements Serializable {
+public class SubjectFilterRequestDto {
 
     private String code;
 
     private String title;
 
-    private Integer credits;
+    private Integer offset;
+
+    private Integer pageSize;
+
 }
