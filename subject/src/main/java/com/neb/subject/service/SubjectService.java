@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.neb.subject.utils.SliceUtils.sliceCriteriaResponseDto;
+
 @Service
 @Slf4j
 @AllArgsConstructor
@@ -81,19 +83,14 @@ public class SubjectService {
 
         Page<SubjectEntity> page = repository.findAll(
                 SubjectSpecifications.likeCode(Optional.ofNullable(filters.getCode()))
-                        .and(SubjectSpecifications.likeTitle(Optional.ofNullable(filters.getTitle()))),
+                .and(SubjectSpecifications.likeTitle(Optional.ofNullable(filters.getTitle()))),
                 pageable
         );
 
-        List<SubjectEntity> subjectResponse = (List<SubjectEntity>) SliceUtils
-                .sliceCriteriaResponseDto(filters.getOffset(), filters.getPageSize(), page)
-                .getResults();
-        SliceCriteriaResponseDto responseDto = SliceUtils
-                .sliceCriteriaResponseDto(filters.getOffset(), filters.getPageSize(), page);
-        responseDto.setResults(subjectResponse.stream().map(subjectMapper::entityToDto).collect(Collectors.toList()));
+        List<SubjectEntity> subjectList = page.toList();
+        List<SubjectResponseDto> results = subjectList.stream().map(subjectMapper::entityToDto).collect(Collectors.toList());
 
-        return responseDto;
-
+        return sliceCriteriaResponseDto(filters.getOffset(), filters.getPageSize(), page, results);
     }
 
     @Transactional

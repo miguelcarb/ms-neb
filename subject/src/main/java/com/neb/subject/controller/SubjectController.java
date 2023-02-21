@@ -34,11 +34,11 @@ public class SubjectController {
             @PathVariable(value = "id") Long id,
             @RequestBody SubjectRequestDto requestDto) {
 
-        log.debug("Entering updateSubjectById [id]: {}", id);
+        log.info("Entering updateSubjectById [id]: {}", id);
 
         SubjectResponseDto responseDto = service.updateSubjectById(id, requestDto);
 
-        log.debug("Leaving updateSubjectById [id]: {}", id);
+        log.info("Leaving updateSubjectById [id]: {}", id);
 
         return ResponseEntity.ok().body(responseDto);
     }
@@ -46,11 +46,11 @@ public class SubjectController {
     @GetMapping(value ="/findSubject/{id}")
     public ResponseEntity<SubjectResponseDto> findSubjectById(@PathVariable(value = "id") Long id) {
 
-        log.debug("Entering findSubjectById [id]: {}", id);
+        log.info("Entering findSubjectById [id]: {}", id);
 
         SubjectResponseDto responseDto = service.findSubjectById(id);
 
-        log.debug("Leaving findSubjectById [id]: {}", id);
+        log.info("Leaving findSubjectById [id]: {}", id);
 
         return ResponseEntity.ok().body(responseDto);
     }
@@ -70,7 +70,7 @@ public class SubjectController {
         @RequestParam(value = "offset", required = false, defaultValue = "0")
         Integer offset
     ) {
-        log.debug("Entering findSubjectByCriteria");
+        log.info("Entering findSubjectByCriteria");
 
         SubjectFilterRequestDto criteria = SubjectFilterRequestDto
                 .builder()
@@ -82,7 +82,7 @@ public class SubjectController {
 
         SliceCriteriaResponseDto responseDto = service.findSubjectByCriteria(criteria);
 
-        log.debug("Leaving findSubjectByCriteria [response]: {}", responseDto);
+        log.info("Leaving findSubjectByCriteria [response]: {}", responseDto);
 
         return ResponseEntity.ok().body(responseDto);
     }

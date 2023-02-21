@@ -4,6 +4,8 @@ import com.neb.subject.api.response.SliceCriteriaResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.util.ObjectUtils;
 
+import java.util.List;
+
 public class SliceUtils {
 
     /**
@@ -14,7 +16,7 @@ public class SliceUtils {
      * @param page
      * @return
      */
-    public static SliceCriteriaResponseDto sliceCriteriaResponseDto(Integer offset, Integer pageSize, Page page) {
+    public static SliceCriteriaResponseDto sliceCriteriaResponseDto(Integer offset, Integer pageSize, Page page, List results) {
 
         SliceCriteriaResponseDto responseDto = new SliceCriteriaResponseDto();
 
@@ -23,7 +25,7 @@ public class SliceUtils {
             responseDto.setPageSize(pageSize);
             responseDto.setTotalPages(page.getTotalPages());
             responseDto.setTotalRecords(page.getTotalElements());
-            responseDto.setResults(page.toList());
+            responseDto.setResults(results);
         }
 
         return responseDto;
