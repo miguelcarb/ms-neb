@@ -23,7 +23,7 @@ public class SubjectInfoEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "subject_code")
+    @JoinColumn(name = "subject_id")
     private SubjectEntity subjectEntity;
 
     @Column(name = "description")

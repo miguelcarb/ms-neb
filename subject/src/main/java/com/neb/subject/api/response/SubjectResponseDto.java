@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -20,4 +21,6 @@ public class SubjectResponseDto implements Serializable {
     private String title;
 
     private Integer credits;
+
+    private List<SubjectInfoResponseDto> subjectMultilingualDescriptions;
 }

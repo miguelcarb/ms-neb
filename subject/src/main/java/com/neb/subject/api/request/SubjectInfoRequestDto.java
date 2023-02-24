@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class SubjectInfoRequestDto {
 
-    private String subjectCode;
+    private Long subjectId;
 
     private String description;
 

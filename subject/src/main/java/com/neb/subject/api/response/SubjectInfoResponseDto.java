@@ -13,7 +13,7 @@ public class SubjectInfoResponseDto {
 
     private Long id;
 
-    private String subjectCode;
+    private Long subjectId;
 
     private String description;
 

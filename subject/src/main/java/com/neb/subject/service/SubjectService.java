@@ -1,11 +1,14 @@
 package com.neb.subject.service;
 
 import com.neb.subject.api.request.SubjectFilterRequestDto;
+import com.neb.subject.api.request.SubjectInfoRequestDto;
 import com.neb.subject.api.request.SubjectRequestDto;
 import com.neb.subject.api.response.SliceCriteriaResponseDto;
 import com.neb.subject.api.response.SubjectResponseDto;
 import com.neb.subject.entities.SubjectEntity;
+import com.neb.subject.mapper.SubjectInfoMapper;
 import com.neb.subject.mapper.SubjectMapper;
+import com.neb.subject.repository.SubjectInfoRepository;
 import com.neb.subject.repository.SubjectRepository;
 import com.neb.subject.repository.spec.SubjectSpecifications;
 import com.neb.subject.utils.SliceUtils;
@@ -31,14 +34,20 @@ import static com.neb.subject.utils.SliceUtils.sliceCriteriaResponseDto;
 public class SubjectService {
 
     private final SubjectRepository repository;
+    private final SubjectInfoRepository subjectInfoRepository;
     private final SubjectMapper subjectMapper;
+    private final SubjectInfoMapper subjectInfoMapper;
 
     @Transactional
     public void addSubject(SubjectRequestDto requestDto) {
 
-        SubjectEntity subject = subjectMapper.dtoToEntity(requestDto);;
+        SubjectEntity subject = subjectMapper.dtoToEntity(requestDto);
+
+        log.info("Entering saveMultilingualInfo");
 
         repository.save(subject);
+
+        saveMultilingualInfo(subject.getId(), requestDto.getSubjectMultilingualDescriptions());
     }
 
     @Transactional
@@ -65,12 +74,7 @@ public class SubjectService {
 
         SubjectEntity subjectEntity = repository.getById(id);
 
-        SubjectResponseDto subjectResponseDto = SubjectResponseDto.builder()
-                .id(id)
-                .code(subjectEntity.getCode())
-                .credits(subjectEntity.getCredits())
-                .title(subjectEntity.getTitle())
-                .build();
+        SubjectResponseDto subjectResponseDto = subjectMapper.entityToDto(subjectEntity);
 
         return subjectResponseDto;
     }
@@ -111,5 +115,16 @@ public class SubjectService {
         SubjectEntity subject = repository.getById(id);
 
         return ObjectUtils.isEmpty(subject);
+    }
+
+    private void saveMultilingualInfo(Long subjectId, List<SubjectInfoRequestDto> multilingualSubjectInfo) {
+        multilingualSubjectInfo.forEach(m -> {
+            m.setSubjectId(subjectId);
+            subjectInfoRepository.save(subjectInfoMapper.dtoToEntity(m));
+        });
+    }
+
+    private void updateMultilingualInfo(Long subjectInfoId) {
+
     }
 }
